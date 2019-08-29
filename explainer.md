@@ -21,7 +21,7 @@ function mainLoop() {
   // As long as there is work to do, don't yield back to the browser until it
   // needs to update the rendering.
   while (thereIsWorkToDo() && !navigator.scheduling.isFramePending()) {
-    doOneUnitOfWork();
+    getNextWorkItem().run();
   }
 
   // If there is more work to do, but you want to give the browser a chance to
@@ -39,13 +39,13 @@ button.addEventListener('click', e => {
   } else {
     // Let the mainLoop logic decide whether to run the event handler code
     // immediately or postpone it until later.
-    enqueueWork(createWorkItemToHandleEvent(e));
+    enqueueWorkItem(workItem);
     mainLoop();
   }
 });
 ```
 
-One limitation of the above code is that event listeners might be delayed while `mainLoop` runs through all pending work. Another proposed API, `navigator.scheduling.isInputPending`, can be included to make the app more responsive:
+One limitation of the above code is that event listeners might be delayed while `mainLoop` runs through all pending work. Another proposed API, [navigator.scheduling.isInputPending](https://github.com/WICG/is-input-pending), can be included to make the app more responsive:
 
 ```javascript
 function mainLoop() {
