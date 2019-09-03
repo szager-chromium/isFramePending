@@ -49,7 +49,6 @@ One limitation of the above code is that event listeners might be delayed while 
 
 ```javascript
 function mainLoop() {
-  mainLoopCallbackId = 0;
   while (thereIsWorkToDo() && !navigator.scheduling.isFramePending() &&
          !navigator.scheduling.isInputPending()) {
     doOneUnitOfWork();
