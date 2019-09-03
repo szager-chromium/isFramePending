@@ -57,6 +57,10 @@ function mainLoop() {
 
 ```
 
+## Security Considerations
+
+isFramePending reveals the fact that the browser has scheduled an animation frame, indicating that the page contents are dirty. More investigation is required to determine whether this information is potentially exploitable.
+
 ## Design Decisions and Non-Goals
 
 This API is not intended to be predictive in any way -- it won't tell you if a rendering opportunity will happen "soon", or provide any budget or estimated time until the next rendering opportunity. It only indicates whether the browser has *already* identified a rendering opportunity that it is waiting to service.
