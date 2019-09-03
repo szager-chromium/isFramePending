@@ -51,7 +51,7 @@ One limitation of the above code is that event listeners might be delayed while 
 function mainLoop() {
   while (thereIsWorkToDo() && !navigator.scheduling.isFramePending() &&
          !navigator.scheduling.isInputPending()) {
-    doOneUnitOfWork();
+    getNextWorkItem().run();
   }
 
 ```
